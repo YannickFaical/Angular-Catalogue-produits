@@ -1,24 +1,34 @@
-<div>
-    <h2>Liste des Produits</h2>
+<div class="product-list">
+  <h2>Liste des Produits</h2>
+  <div class="filter">
     <label for="category">Filtrer par catégorie :</label>
     <select
-    id="category"
-    [(ngModel)]="selectedCategoryId"
-    (change)="onCategoryChange()"
-  >
-    <option [value]="null">Toutes les catégories</option>
-    <option *ngFor="let category of categories" [value]="category.id">
-      {{ category.name }}
-    </option>
-  </select>
-  
-  
-    <ul>
-      <li *ngFor="let product of products">
-        {{ product.name }} - {{ product.price }}€
-        <small *ngIf="product.category">({{ product.category.name }})</small>
-        <small *ngIf="!product.category">(Catégorie non définie)</small>
-      </li>
-    </ul>
+      id="category"
+      [(ngModel)]="selectedCategoryId"
+      (change)="onCategoryChange()"
+    >
+      <option [value]="'0'">Toutes les catégories</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
   </div>
-  
+
+  <ul class="product-items">
+    <li *ngFor="let product of products" class="product-item">
+      <span class="product-name">{{ product.name }}</span> -
+      <span class="product-price">{{ product.price }}€</span>
+      <small *ngIf="product.category?.name" class="product-category">
+        ({{ product.category.name }})
+      </small>
+      <app-delete-product
+        *ngIf="product.id"
+        [productId]="product.id"
+        class="delete-button"
+      ></app-delete-product>
+      <small *ngIf="!product.category?.name" class="no-category">
+        (Catégorie non définie)
+      </small>
+    </li>
+  </ul>
+</div>

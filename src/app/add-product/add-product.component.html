@@ -1,9 +1,18 @@
-<div>
-    <h2>Ajouter un Produit</h2>
-    <form (ngSubmit)="addProduct()">
+<div class="add-product-form">
+  <h2>Ajouter un Produit</h2>
+  <form (ngSubmit)="addProduct()">
+    <div class="form-group">
       <label for="name">Nom :</label>
-      <input id="name" [(ngModel)]="product.name" name="name" required />
-  
+      <input
+        id="name"
+        [(ngModel)]="product.name"
+        name="name"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
       <label for="price">Prix :</label>
       <input
         id="price"
@@ -11,20 +20,25 @@
         name="price"
         type="number"
         required
+        class="form-control"
       />
-  
-      <label for="category">Catégorie :</label>
-      <select id="category"
-       [(ngModel)]="product.category.id"
-        name="category" required
-        >
+    </div>
 
+    <div class="form-group">
+      <label for="category">Catégorie :</label>
+      <select
+        id="category"
+        [(ngModel)]="product.category"
+        name="category"
+        required
+        class="form-control"
+      >
         <option *ngFor="let category of categories" [ngValue]="category">
-          {{ category.name }} ---- {{category.id}}
+          {{ category.name }}
         </option>
       </select>
-  
-      <button type="submit">Ajouter</button>
-    </form>
-  </div>
-  
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </form>
+</div>
